@@ -5,6 +5,15 @@ import { useState } from "react";
 function App() {
   const [toDos, setToDos] = useState([]);
   const [toDo, setToDo] = useState("");
+
+
+const deleteTodo = (index)=>{
+  var newList = toDos;
+  newList.splice(index,1)
+  setToDos([...newList])
+}
+
+   
   return (
     <div className="app">
       <div className="mainHeading">
@@ -19,7 +28,7 @@ function App() {
           value={toDo}
           onChange={(e) => setToDo(e.target.value)}
           type="text"
-          placeholder="🖊️ Add item..."
+          placeholder="🖊️ Add toDo..."
         />
         <i
           className="fas fa-plus"
@@ -29,7 +38,7 @@ function App() {
         ></i>
       </div>
       <div className="todos">
-        {toDos.map((obj) => {
+        {toDos.map((obj,index) => {
           return (
             <div className="todo">
               <div className="left">
@@ -53,7 +62,7 @@ function App() {
                 <p>{obj.text}</p>
               </div>
               <div className="right">
-                <i className="fas fa-times"></i>
+                <i className="fas fa-times" onClick={()=> deleteTodo(index)} ></i>
               </div>
             </div>
           );
