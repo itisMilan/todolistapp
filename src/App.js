@@ -56,8 +56,7 @@ const deleteTodo = (index)=>{
                   id={obj.id}
                   obj={obj.status}
                   type="checkbox"
-                  name=""
-                  id=""
+                 
                 />
                 <p>{obj.text}</p>
               </div>
@@ -72,6 +71,7 @@ const deleteTodo = (index)=>{
           if(obj.status){
             return <h1>{  obj.text} </h1>
           }
+          return null
         })}
       </div>
     </div>
