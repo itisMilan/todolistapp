@@ -21,7 +21,7 @@ const deleteTodo = (index)=>{
       </div>
       <div className="subHeading">
         <br />
-        <h2>Set Your Task Now 🌝 ☕ </h2>
+        <h2>  Set Your Task Now 🌝 ☕ </h2>
       </div>
       <div className="input">
         <input
