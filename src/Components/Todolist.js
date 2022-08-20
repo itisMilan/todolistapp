@@ -1,12 +1,29 @@
 import React from "react";
-import "./App.css";
+import "../todo.css";
 import { useState } from "react";
-
-function App() {
+import {useAuth} from '../Context/AuthContext.js';
+import {link,useNavigate} from 'react-router-dom';
+function Todolist() {
   const [toDos, setToDos] = useState([]);
   const [toDo, setToDo] = useState("");
+  const {logout}=useAuth();
+  const[error,setError]=useState();
+  const[loading,setLoading]=useState(false);
+  const navigate=useNavigate();
 
-
+  async function handleLogOut(){
+ 
+   try{
+    setError("")
+    setLoading(false)
+    await logout ()
+    navigate('/login')
+   }
+   catch{
+     setError("Failed To Log Out")
+     setLoading(false);
+   }
+  }
 const deleteTodo = (index)=>{
   var newList = toDos;
   newList.splice(index,1)
@@ -18,6 +35,7 @@ const deleteTodo = (index)=>{
     <div className="app">
       <div className="mainHeading">
         <h1>ToDo List</h1>
+        {error}
       </div>
       <div className="subHeading">
         <br />
@@ -37,6 +55,7 @@ const deleteTodo = (index)=>{
           }
         ></i>
       </div>
+          <button disabled={loading}onClick={()=>handleLogOut()}>Logout</button>
       <div className="todos">
         {toDos.map((obj,index) => {
           return (
@@ -63,6 +82,7 @@ const deleteTodo = (index)=>{
               <div className="right">
                 <i className="fas fa-times" onClick={()=> deleteTodo(index)} ></i>
               </div>
+
             </div>
           );
         })}
@@ -73,4 +93,4 @@ const deleteTodo = (index)=>{
   );
 }
 
-export default App;
+export default Todolist;
