@@ -10,14 +10,14 @@ export default function Todolist() {
   const [error,setError]=useState('');
   const [loading,setLoading]=useState('');
   const navigate = useNavigate();
-  const LOCAL_STORAGE_KEY ="todoapp.todos";
-  useEffect(()=>{
-  const storedTodos=JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
-  if (storedTodos) setTodos(storedTodos)
-  },[])
-  useEffect(()=>{
-   localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(todos))
-  },[todos])
+  // const LOCAL_STORAGE_KEY ="todoapp.todos";
+  // useEffect(()=>{
+  // const storedTodos=JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+  // if (storedTodos) setTodos(storedTodos)
+  // },[])
+  // useEffect(()=>{
+  //  localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(todos))
+  // },[todos])
   async function handleLogout(){
    try{
     setError("")
