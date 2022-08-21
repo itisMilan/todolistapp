@@ -5,9 +5,9 @@ import {useAuth} from '../Context/AuthContext.js';
 
 export default function ForgotPassword() {
   const emailRef=useRef();
-  const passwordRef=useRef();
+
   const {resetPassword} = useAuth();
-  const {logout}= useAuth();
+ 
   const [error,setError]=useState();
   const [loading,setLoading]=useState(false);
   const [message,setMessage]=useState();
