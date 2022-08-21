@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../Todolist.css";
 import { useAuth } from "../Context/AuthContext";
 import {useNavigate} from 'react-router-dom'
@@ -10,8 +10,15 @@ export default function Todolist() {
   const [error,setError]=useState('');
   const [loading,setLoading]=useState('');
   const navigate = useNavigate();
+  const LOCAL_STORAGE_KEY ="todoapp.todos";
+  useEffect(()=>{
+  const storedTodos=JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+  if (storedTodos) setTodos(storedTodos)
+  },[])
+  useEffect(()=>{
+   localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(todos))
+  },[todos])
   async function handleLogout(){
-   
    try{
     setError("")
     setLoading(true)
@@ -101,6 +108,7 @@ export default function Todolist() {
           <button onClick={() => clearallTodo()}>Clear All</button>
         </div>
         <button className="logout" disabled={loading} onClick={()=>handleLogout()}>Log Out</button>
+        {error}
       </div>
       {/*  */}
     </>

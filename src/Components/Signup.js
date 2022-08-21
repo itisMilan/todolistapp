@@ -1,8 +1,8 @@
 import React, { useRef ,useState} from "react";
 import "../SignupLogin.css";
 import {useAuth} from '../Context/AuthContext.js'
-import { Navigate } from "react-router-dom";
-import {Link,useNavigate} from 'react-router-dom'
+
+import {useNavigate} from 'react-router-dom'
 
 export default function Signup() {
     const emailRef=useRef();
