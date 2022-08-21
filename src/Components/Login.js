@@ -7,7 +7,7 @@ export default function Login() {
   const emailRef=useRef();
   const passwordRef=useRef();
   const {login} = useAuth();
-  const {logout}= useAuth();
+ 
   const [error,setError]=useState();
   const [loading,setLoading]=useState(false);
   const navigate=useNavigate();
@@ -31,16 +31,16 @@ export default function Login() {
     <meta charSet="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Log In</title>
-    {error}
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
+      />
     <link rel="stylesheet" href="SignupLogin.css" />
     <div className="container">
       <div className="form">
         <div className="sign-in-section">
           <h1>Log in</h1>
+      {error}
           <br>
           </br>
           {/* <ul>

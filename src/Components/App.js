@@ -3,7 +3,7 @@ import {BrowserRouter,Routes,Route } from 'react-router-dom';
 import { AuthProvider } from '../Context/AuthContext';
 import Login from './Login';
 import Signup from './Signup';
-import Todolist from './Todolist';
+import TodoList from './TodoList';
 import ForgotPassword from './forgot-password';
 
 export default function App() {
@@ -12,7 +12,7 @@ export default function App() {
         <BrowserRouter>
         <AuthProvider>
         <Routes>
-            <Route path='/todolist' element={<Todolist></Todolist>}></Route>
+            <Route path='/todolist' element={<TodoList></TodoList>}></Route>
             
             <Route path='/' element={<Signup></Signup>}></Route>
             <Route path='/login' element={<Login></Login>}></Route>

@@ -1,22 +1,21 @@
-import React from "react";
-import "../todo.css";
-import { useState } from "react";
-import {useAuth} from '../Context/AuthContext.js';
-import {link,useNavigate} from 'react-router-dom';
-function Todolist() {
-  const [toDos, setToDos] = useState([]);
-  const [toDo, setToDo] = useState("");
-  const {logout}=useAuth();
-  const[error,setError]=useState();
-  const[loading,setLoading]=useState(false);
-  const navigate=useNavigate();
+import React, { useState } from "react";
+import "../Todolist.css";
+import { useAuth } from "../Context/AuthContext";
+import {useNavigate} from 'react-router-dom'
 
-  async function handleLogOut(){
- 
+export default function Todolist() {
+  const [currentTodo, setCurrentTodo] = useState("");
+  const [todos, setTodos] = useState([]);
+  const {logout}=useAuth();
+  const [error,setError]=useState('');
+  const [loading,setLoading]=useState('');
+  const navigate = useNavigate();
+  async function handleLogout(){
+   
    try{
     setError("")
-    setLoading(false)
-    await logout ()
+    setLoading(true)
+    await logout();
     navigate('/login')
    }
    catch{
@@ -24,73 +23,86 @@ function Todolist() {
      setLoading(false);
    }
   }
-const deleteTodo = (index)=>{
-  var newList = toDos;
-  newList.splice(index,1)
-  setToDos([...newList])
-}
 
-   
+  function createNewTodo(currentTodo) {
+    let todosArray = [...todos];
+    todosArray.push({ todo: currentTodo, isCompleted: false });
+    setTodos(todosArray);
+  }
+  function completeTodo(index) {
+    let todosArray = [...todos];
+    todosArray[index].isCompleted = !todosArray[index].isCompleted;
+    setTodos(todosArray);
+  }
+  function deleteTodo(index) {
+    let todosArray = [...todos];
+    todosArray.splice(index, 1);
+    setTodos(todosArray);
+  }
+  function clearallTodo() {
+    return setTodos([]);
+  }
   return (
-    <div className="app">
-      <div className="mainHeading">
-        <h1>ToDo List</h1>
-        {error}
+    <>
+      {/* Created By CodingNepal - www.codingnepalweb.com */}
+      {/* <meta charSet="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> */}
+      {/* <title>Todo App JavaScript | CodingNepal</title> */}
+      <link rel="stylesheet" href="style.css" />
+      <div className="wrapper">
+        <header>Todo App</header>
+        <div className="inputField">
+          <input
+            type="text"
+            placeholder="Add your new todo"
+            className="todo-input"
+            value={currentTodo}
+            onChange={(e) => {
+              setCurrentTodo(e.target.value);
+            }}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                createNewTodo(currentTodo);
+                setCurrentTodo("");
+              }
+            }}
+          />
+          <button onClick={() => createNewTodo(currentTodo)}>
+            <i className="fas fa-plus" />
+          </button>
+        </div>
+        <ul className="todoList">
+          {todos.map((todo, index) => {
+            return (
+              <span key={todo} className="todo">
+                <li>
+                  <button type="checkbox"
+                    className="checkbox" 
+                    onClick={() => completeTodo(index)}
+                  >
+                    {todo.isCompleted && <span> &#x2714; </span>}
+                  </button>
+                  <span className={todo.isCompleted ? "done" : ""}  >
+                    {todo.todo}
+                  </span>
+                  <button className="icon" onClick={(e) => deleteTodo(index)}>
+                    &#128465;
+                  </button>
+                </li>
+              </span>
+            );
+          })}
+        </ul>
+        <div className="footer">
+          <span>
+            You have <span className="pendingTasks" /> {todos.length}
+            -pending tasks
+          </span>
+          <button onClick={() => clearallTodo()}>Clear All</button>
+        </div>
+        <button className="logout" disabled={loading} onClick={()=>handleLogout()}>Log Out</button>
       </div>
-      <div className="subHeading">
-        <br />
-        <h2>  Set Your Task Now 🌝 ☕ </h2>
-      </div>
-      <div className="input">
-        <input
-          value={toDo}
-          onChange={(e) => setToDo(e.target.value)}
-          type="text"
-          placeholder="🖊️ Add toDo..."
-        />
-        <i
-          className="fas fa-plus"
-          onClick={() =>
-            setToDos([...toDos, { id: Date.now(), text: toDo, status: false }])
-          }
-        ></i>
-      </div>
-          <button disabled={loading}onClick={()=>handleLogOut()}>Logout</button>
-      <div className="todos">
-        {toDos.map((obj,index) => {
-          return (
-            <div className="todo">
-              <div className="left">
-                <input 
-                  onChange={(e)=>{
-                    console.log(e.target.checked);
-                    console.log(obj)
-                    setToDos(toDos.filter(obj2=>{
-                      if(obj2.id===obj.id){
-                        obj2.status=e.target.checked
-                      }
-                      return obj2
-                    }))
-                  }}
-                  id={obj.id}
-                  obj={obj.status}
-                  type="checkbox"
-                 
-                />
-                <p>{obj.text}</p>
-              </div>
-              <div className="right">
-                <i className="fas fa-times" onClick={()=> deleteTodo(index)} ></i>
-              </div>
-
-            </div>
-          );
-        })}
-
-     
-      </div>
-    </div>
+      {/*  */}
+    </>
   );
 }
-
-export default Todolist;
