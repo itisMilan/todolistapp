@@ -1,3 +1,9 @@
+# To Do List App
+This is a project involving a todolist app with authentication.
+Check The Working Site On The https://effulgent-starlight-0d125b.netlify.app/.
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
