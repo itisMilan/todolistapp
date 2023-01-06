@@ -3,7 +3,8 @@ This is a project involving a todolist app with authentication.
 <a href="https://effulgent-starlight-0d125b.netlify.app/">Demo</a>
 For this project, I created a web application that allows users to create and manage their own todo lists, using Firebase for cloud functionality and user authentication. I built the app using React, and integrated it with Firebase to use Firebase's authentication service to allow users to create accounts and sign in to the app. The use of Firebase has added an additional layer of convenience and security for users.
 
-
+# How It's Made:
+Tech Used:Html,Css,React,Js,Firebase
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
